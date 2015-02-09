@@ -12,6 +12,9 @@
     "url": "https://git.heroku.com/jppnew.git"
   },
   "author": "JPP",
+  "engines": {
+    "node": "0.10.x"
+  },
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.11.0",
