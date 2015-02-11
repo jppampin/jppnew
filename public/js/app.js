@@ -1,4 +1,4 @@
-var app = angular.module('StarterApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate']);
+var app = angular.module('StarterApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate', 'ngSanitize']);
 
 app.controller('AppCtrl', ['$http', '$scope', '$mdSidenav', function($http, $scope, $mdSidenav){
   $scope.toggleSidenav = function(menuId) {
@@ -7,14 +7,18 @@ app.controller('AppCtrl', ['$http', '$scope', '$mdSidenav', function($http, $sco
 
   $http.get('/news').success(function(data) {
     var rows = [];
+
     var row = {
-    source1: '',
-    source2: '',
-    source3: '',
-    articles1: [],
-    articles2: [],
-    articles3: []
+      source1: '',
+      source2: '',
+      source3: '',
+      articles1: [],
+      articles2: [],
+      articles3: []
     };
+
+    var parser= new DOMParser();
+
     var j=0;
     for(var i=0; i<data.length;i++){
       j++;
@@ -22,10 +26,12 @@ app.controller('AppCtrl', ['$http', '$scope', '$mdSidenav', function($http, $sco
         row.source1 = data[i].source;
         row.articles1 = data[i].articles;
       }
+
       if(j == 2){
         row.source2 = data[i].source;
         row.articles2 = data[i].articles;
       }
+
       if(j == 3){
         row.source3 = data[i].source;
         row.articles3 = data[i].articles;
