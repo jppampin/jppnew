@@ -1,0 +1,19 @@
+{
+  "name": "jppnew",
+  "main": "index.js",
+  "version": "0.0.0",
+  "authors": [
+    "jpp <jppampin@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-loading-bar": "~0.6.0"
+  }
+}
