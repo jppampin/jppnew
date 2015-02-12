@@ -25,16 +25,19 @@ app.controller('AppCtrl', ['$http', '$scope', '$mdSidenav', function($http, $sco
       if(j == 1){
         row.source1 = data[i].source;
         row.articles1 = data[i].articles;
+        row.count1 = data[i].articles.length;
       }
 
       if(j == 2){
         row.source2 = data[i].source;
         row.articles2 = data[i].articles;
+        row.count2 = data[i].articles.length;
       }
 
       if(j == 3){
         row.source3 = data[i].source;
         row.articles3 = data[i].articles;
+        row.count3 = data[i].articles.length;
         rows.push(row);
         row = {
           source1: '',

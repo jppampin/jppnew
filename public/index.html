@@ -28,18 +28,21 @@
                 <md-list> 
                   <md-item ng-repeat="item in row.articles1 | limitTo:5">
                     <md-item-content>
-                    <!--
-                      <div class="md-tile-left">
-                          <img ng-src="{{item.image}}" class="face" alt="{{item.  title}}">
+                    <!-- Single Line Title -->
+                      <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" ng-mouseover="hover = true" ng-mouseout="hover = false" >
+                        <h3>{{item.title}} </h3> <span ng-if="hover">Read More...</span>
                       </div>
-                      -->
-                      <div class="md-tile-content">
-                      <a ng-href="{{item.link}}">
+                     <!-- End Single Line Title -->
+
+                    <!-- Article Details -->
+                      <div class="md-tile-content" ng-if="item.expanded" ng-click="item.expanded = !item.expanded" >
                         <h3>{{item.title}}</h3>
-                      </a>
                         <h4>{{item.pubDate}}</h4>
                         <p ng-bind-html="item.description"></p>
+                        <a ng-href="{{item.link}}"> Complete article... </a>
                       </div>
+                    <!-- End Article Details -->
+
                     </md-item-content>
                     <md-divider ng-if="!$last"></md-divider>
                   </md-item>
@@ -53,18 +56,20 @@
                 <md-list> 
                   <md-item ng-repeat="item in row.articles2  | limitTo:5">
                     <md-item-content>
-                    <!--
-                      <div class="md-tile-left">
-                          <img ng-src="{{item.image}}" class="face" alt="{{item.title}}">
+                    <!-- Single Line Title -->
+                      <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" >
+                        <h3>{{item.title}} </h3> <span ng-if="hover">Read More...</span>
                       </div>
-                      -->
-                      <div class="md-tile-content">
-                      <a ng-href="{{item.link}}">
+                     <!-- End Single Line Title -->
+
+                    <!-- Article Details -->
+                    <div class="md-tile-content" ng-if="item.expanded" ng-click="item.expanded = !item.expanded">
                         <h3>{{item.title}}</h3>
-                        </a>
                         <h4>{{item.pubDate}}</h4>
                         <p ng-bind-html="item.description"></p>
+                        <a ng-href="{{item.link}}"> Complete article... </a>                        
                       </div>
+                    <!-- End Article Details -->
                     </md-item-content>
                     <md-divider ng-if="!$last"></md-divider>
                   </md-item>
@@ -78,18 +83,20 @@
                 <md-list> 
                   <md-item ng-repeat="item in row.articles3  | limitTo:5">
                     <md-item-content>
-                    <!--
-                      <div class="md-tile-left">
-                          <img ng-src="{{item.image}}" class="face" alt="{{item.title}}">
+                     <!-- Single Line Title -->
+                      <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" >
+                        <h3>{{item.title}} </h3> <span ng-if="hover">Read More...</span>
                       </div>
-                      -->
-                      <div class="md-tile-content">
-                       <a ng-href="{{item.link}}">
+                     <!-- End Single Line Title -->
+
+                    <!-- Article Details -->
+                      <div class="md-tile-content" ng-if="item.expanded" ng-click="item.expanded = !item.expanded">
                         <h3>{{item.title}}</h3>
-                        </a>
                         <h4>{{item.pubDate}}</h4>
                         <p ng-bind-html="item.description"></p>
+                        <a ng-href="{{item.link}}"> Complete article... </a>                        
                       </div>
+                    <!-- End Article Details -->
                     </md-item-content>
                     <md-divider ng-if="!$last"></md-divider>
                   </md-item>

@@ -40,3 +40,7 @@ https://github.com/google/material-design-icons
   height: 38px;
   margin: 16px;
 }
+
+md-item{
+  cursor: pointer;
+}
