@@ -6,9 +6,21 @@ function XmlReader(){
 
 XmlReader.prototype.load = function load(url, cb){
 
+var urlParser = require('url');
+var urlParsed = urlParser.parse(url);
+
+var options = {
+  host: 'fwproxyl',
+  port: 8080,
+  path: url,
+  headers: {
+    Host: urlParsed.host
+  }
+};
+
 var http = require('http');
 
-http.get(url
+http.get(options
 	, function onCallback(res){
 		var body = '';
 

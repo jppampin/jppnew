@@ -19,8 +19,9 @@
           TODO: build sections
         </md-sidenav>
         <div layout="column" flex id="content">
-            <div layout="row" ng-repeat="row in rows" flex>
-
+            <md-list>
+            <md-item ng-repeat="row in rows">
+            <md-item-content layout-align="center start">
             <!-- Column 1 -->
             <div flex>
                 <md-subheader class="md-primary">{{row.source1}}</md-subheader>
@@ -95,7 +96,9 @@
                 </md-list>
             </div>        
             <!-- End Column 3 -->
-            </div>
+            <md-item-content>
+            </md-item>
+            </md-list>
         </div>
     </div>
     
