@@ -18,10 +18,10 @@
         <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" >
           TODO: build sections
         </md-sidenav>
-        <div layout="column" flex id="content">
+        <div layout="column" flex id="content" ng-cloak>
             <md-list>
             <md-item ng-repeat="row in rows">
-            <md-item-content layout-align="center start">
+            <md-item-content layout="row" layout-sm="column" layout-align="center start">
             <!-- Column 1 -->
             <div flex>
                 <md-subheader class="md-primary">{{row.source1}}</md-subheader>
