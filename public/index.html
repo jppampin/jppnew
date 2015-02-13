@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css/app.css">
     <link rel="stylesheet" type="text/css" href="/bower_components/angular-loading-bar/build/loading-bar.min.css">
   </head>
-  <body layout="column" ng-controller="AppCtrl">
+  <body layout="column" ng-controller="AppCtrl" ng-cloak>
     <md-toolbar layour="row">
     <div class="md-toolbar-tools">
       <button ng-click="toggleSidenav('left')" class="menuBtn">
@@ -26,7 +26,7 @@
             <div flex>
                 <md-subheader class="md-primary">{{row.source1}}</md-subheader>
                 <md-list> 
-                  <md-item ng-repeat="item in row.articles1 | limitTo:5">
+                  <md-item ng-repeat="item in row.articles1">
                     <md-item-content>
                     <!-- Single Line Title -->
                       <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" ng-mouseover="hover = true" ng-mouseout="hover = false" >
@@ -45,8 +45,10 @@
 
                     </md-item-content>
                     <md-divider ng-if="!$last"></md-divider>
+                    <button ng-click="showMore(row, 1);" class="md-button md-primary" ng-if="$last && row.showMore1">Show More ...</button>
                   </md-item>
                 </md-list>
+
             </div>        
             <!-- End Column 1 -->
 
@@ -54,7 +56,7 @@
             <div flex>
                 <md-subheader class="md-primary">{{row.source2}}</md-subheader>
                 <md-list> 
-                  <md-item ng-repeat="item in row.articles2  | limitTo:5">
+                  <md-item ng-repeat="item in row.articles2">
                     <md-item-content>
                     <!-- Single Line Title -->
                       <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" >
@@ -72,6 +74,7 @@
                     <!-- End Article Details -->
                     </md-item-content>
                     <md-divider ng-if="!$last"></md-divider>
+                    <button ng-click="showMore(row, 2);" class="md-button md-primary" ng-if="$last && row.showMore2">Show More ...</button>
                   </md-item>
                 </md-list>
             </div>        
@@ -81,7 +84,7 @@
             <div flex>
                 <md-subheader class="md-primary">{{row.source3}}</md-subheader>
                 <md-list> 
-                  <md-item ng-repeat="item in row.articles3  | limitTo:5">
+                  <md-item ng-repeat="item in row.articles3">
                     <md-item-content>
                      <!-- Single Line Title -->
                       <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" >
@@ -99,6 +102,7 @@
                     <!-- End Article Details -->
                     </md-item-content>
                     <md-divider ng-if="!$last"></md-divider>
+                    <button ng-click="showMore(row, 3);" class="md-button md-primary" ng-if="$last && row.showMore3">Show More ...</button>
                   </md-item>
                 </md-list>
             </div>        
