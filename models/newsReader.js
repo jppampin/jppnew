@@ -11,7 +11,9 @@ var ClarinFeed = { source: 'Clarin', url: 'http://clarin.feedsportal.com/c/33088
 var RedUsersFeed = {source: 'RedUsers', url: 'http://www.redusers.com/noticias/feed/' };
 var SportEsFeed= { source: 'Sport ES', url: 'http://www.sport.es/es/rss/last_news/rss.xml' };
 var KickAssMovies = { source: 'KickAss Movies', url: 'http://kickass.to/movies/?rss=1'};
-var feeds = [TnFeed, InfobaeFeed,  ClarinFeed, RedUsersFeed, KickAssMovies];
+var YifyMoviesBest2014 = { source: 'Yify Movies - Best 2014', url: 'http://yts.re/rss/2014/1080p/all/7'};
+var YifyMovies2015 = { source: 'Yify Movies - 2015', url: 'http://yts.re/rss/2015/all/all/0'};
+var feeds = [TnFeed, InfobaeFeed,  ClarinFeed, RedUsersFeed, KickAssMovies, YifyMoviesBest2014, YifyMovies2015];
 var feed;
 var urlParsed = [];
 
