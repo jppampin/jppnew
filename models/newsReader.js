@@ -10,7 +10,8 @@ var LaNacionFeed = {source: 'La Nacion', url: 'http://contenidos.lanacion.com.ar
 var ClarinFeed = { source: 'Clarin', url: 'http://clarin.feedsportal.com/c/33088/f/577681/index.rss'} ;
 var RedUsersFeed = {source: 'RedUsers', url: 'http://www.redusers.com/noticias/feed/' };
 var SportEsFeed= { source: 'Sport ES', url: 'http://www.sport.es/es/rss/last_news/rss.xml' };
-var feeds = [TnFeed, InfobaeFeed,  ClarinFeed, RedUsersFeed, SportEsFeed];
+var KickAssMovies = { source: 'KickAss Movies', url: 'http://kickass.to/movies/?rss=1'};
+var feeds = [TnFeed, InfobaeFeed,  ClarinFeed, RedUsersFeed, KickAssMovies];
 var feed;
 var urlParsed = [];
 

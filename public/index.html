@@ -29,8 +29,8 @@
                   <md-item ng-repeat="item in row.articles1">
                     <md-item-content>
                     <!-- Single Line Title -->
-                      <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" ng-mouseover="hover = true" ng-mouseout="hover = false" >
-                        <h3>{{item.title}} </h3> <span ng-if="hover">Read More...</span>
+                      <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" >
+                        <h3>{{item.title}} </h3> 
                       </div>
                      <!-- End Single Line Title -->
 
@@ -38,14 +38,21 @@
                       <div class="md-tile-content" ng-if="item.expanded" ng-click="item.expanded = !item.expanded" >
                         <h3>{{item.title}}</h3>
                         <h4>{{item.pubDate}}</h4>
-                        <p ng-bind-html="item.description"></p>
-                        <a ng-href="{{item.link}}"> Complete article... </a>
+                        <p layout-wrap ng-bind-html="item.description"></p>
+                        <div layout="column" layout-align="center end" layout-padding>
+                        <div>
+                        <md-button ng-href="{{item.link}}" class="md-raised md-primary"> Ver articulo completo... </md-button>                        
+                        </div>
+                        </div>
                       </div>
                     <!-- End Article Details -->
-
                     </md-item-content>
                     <md-divider ng-if="!$last"></md-divider>
-                    <button ng-click="showMore(row, 1);" class="md-button md-primary" ng-if="$last && row.showMore1">Show More ...</button>
+                    <div layout="column" layout-align="center end" layout-padding>
+                    <div>
+                    <md-button ng-href="#" ng-click="showMore(row, 1);" class="md-primary" ng-if="$last && row.showMore1">Ver mas articulos...</md-button>
+                    </div>
+                     </div>
                   </md-item>
                 </md-list>
 
@@ -60,7 +67,7 @@
                     <md-item-content>
                     <!-- Single Line Title -->
                       <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" >
-                        <h3>{{item.title}} </h3> <span ng-if="hover">Read More...</span>
+                        <h3>{{item.title}} </h3>
                       </div>
                      <!-- End Single Line Title -->
 
@@ -68,13 +75,21 @@
                     <div class="md-tile-content" ng-if="item.expanded" ng-click="item.expanded = !item.expanded">
                         <h3>{{item.title}}</h3>
                         <h4>{{item.pubDate}}</h4>
-                        <p ng-bind-html="item.description"></p>
-                        <a ng-href="{{item.link}}"> Complete article... </a>                        
+                        <p layout-wrap ng-bind-html="item.description"></p>
+                        <div layout="column" layout-align="center end" layout-padding>
+                        <div>
+                        <md-button ng-href="{{item.link}}" class="md-raised md-primary"> Ver articulo completo... </md-button>                        
+                        </div>
+                        </div>
                       </div>
                     <!-- End Article Details -->
                     </md-item-content>
                     <md-divider ng-if="!$last"></md-divider>
-                    <button ng-click="showMore(row, 2);" class="md-button md-primary" ng-if="$last && row.showMore2">Show More ...</button>
+                    <div layout="column" layout-align="center end" layout-padding>
+                    <div>
+                    <md-button ng-href="#" ng-click="showMore(row, 2);" class="md-primary" ng-if="$last && row.showMore2">Ver mas articulos...</md-button>
+                    </div>
+                     </div>
                   </md-item>
                 </md-list>
             </div>        
@@ -88,7 +103,7 @@
                     <md-item-content>
                      <!-- Single Line Title -->
                       <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" >
-                        <h3>{{item.title}} </h3> <span ng-if="hover">Read More...</span>
+                        <h3>{{item.title}} </h3> 
                       </div>
                      <!-- End Single Line Title -->
 
@@ -96,13 +111,21 @@
                       <div class="md-tile-content" ng-if="item.expanded" ng-click="item.expanded = !item.expanded">
                         <h3>{{item.title}}</h3>
                         <h4>{{item.pubDate}}</h4>
-                        <p ng-bind-html="item.description"></p>
-                        <a ng-href="{{item.link}}"> Complete article... </a>                        
+                        <p layout-wrap ng-bind-html="item.description"></p>
+                        <div layout="column" layout-align="center end" layout-padding>
+                        <div>
+                        <md-button ng-href="{{item.link}}" class="md-raised md-primary"> Ver articulo completo... </md-button>                        
+                        </div>
+                        </div>
                       </div>
                     <!-- End Article Details -->
                     </md-item-content>
                     <md-divider ng-if="!$last"></md-divider>
-                    <button ng-click="showMore(row, 3);" class="md-button md-primary" ng-if="$last && row.showMore3">Show More ...</button>
+                    <div layout="column" layout-align="center end" layout-padding>
+                    <div>
+                    <md-button ng-href="#" ng-click="showMore(row, 3);" class="md-primary" ng-if="$last && row.showMore3">Ver mas articulos...</md-button>
+                    </div>
+                     </div>
                   </md-item>
                 </md-list>
             </div>        
