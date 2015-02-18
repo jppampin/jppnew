@@ -13,8 +13,9 @@ var RedUsersFeed = {source: 'RedUsers', url: 'http://www.redusers.com/noticias/f
 var SportEsFeed= { source: 'Sport ES', url: 'http://www.sport.es/es/rss/last_news/rss.xml', tags: ['noticia', 'desportes'] };
 var KickAssMovies = { source: 'KickAss Movies', url: 'http://kickass.to/movies/?rss=1', tags: ['torrent', 'pelicula']};
 var YifyMoviesBest2014 = { source: 'Yify Movies - Best 2014', url: 'http://yts.re/rss/2014/1080p/all/7', tags: ['torrent', 'pelicula']};
-var YifyMovies2015 = { source: 'Yify Movies - 2015', url: 'http://yts.re/rss/2015/all/all/0', tags: ['torrent', 'pelicula']};
-var feeds = [TnFeed, InfobaeFeed,  ClarinFeed, RedUsersFeed, KickAssMovies, YifyMoviesBest2014, YifyMovies2015, LaNacionFeed];
+var YifyMovies2015 = { source: 'Yify Movies - 2015', url: 'http://yts.re/rss/2015/1080p/all/0', tags: ['torrent', 'pelicula']};
+var TrailersAddict = { source: 'Trailers Peliculas', url: 'http://www.traileraddict.com/rss', tags: ['trailer', 'pelicula']};
+var feeds = [TnFeed, InfobaeFeed,  ClarinFeed, RedUsersFeed, KickAssMovies, YifyMoviesBest2014, YifyMovies2015, LaNacionFeed, TrailersAddict];
 var feed;
 var urlParsed = [];
 

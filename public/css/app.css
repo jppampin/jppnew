@@ -44,3 +44,7 @@ https://github.com/google/material-design-icons
 md-item{
   cursor: pointer;
 }
+
+.detail p > img {
+  width: 100%;
+}
