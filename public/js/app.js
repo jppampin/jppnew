@@ -19,27 +19,30 @@ app.controller('AppCtrl', ['$http', '$scope', '$mdSidenav', '$filter',  function
     };
 
     var j=0;
-    for(var i=0; i<data.length;i++){
+
+    _.chain(data)
+      .shuffle()
+      .each(function(feed){
       j++;
       if(j == 1){
-        row.source1 = data[i].source;
-        row.articles1 = $filter('limitTo')(data[i].articles, PAGESIZE);
-        row.count1 = data[i].articles.length;
-        row.showMore1 = (data[i].articles.length > PAGESIZE);
+        row.source1 = feed.source;
+        row.articles1 = $filter('limitTo')(feed.articles, PAGESIZE);
+        row.count1 = feed.articles.length;
+        row.showMore1 = (feed.articles.length > PAGESIZE);
       }
 
       if(j == 2){
-        row.source2 = data[i].source;
-        row.articles2 = $filter('limitTo')(data[i].articles, PAGESIZE);
-        row.count2 = data[i].articles.length;
-        row.showMore2 = (data[i].articles.length > PAGESIZE);
+        row.source2 = feed.source;
+        row.articles2 = $filter('limitTo')(feed.articles, PAGESIZE);
+        row.count2 = feed.articles.length;
+        row.showMore2 = (feed.articles.length > PAGESIZE);
       }
 
       if(j == 3){
-        row.source3 = data[i].source;
-        row.articles3 = $filter('limitTo')(data[i].articles, PAGESIZE);
-        row.count3 = data[i].articles.length;
-        row.showMore3 = (data[i].articles.length > PAGESIZE);
+        row.source3 = feed.source;
+        row.articles3 = $filter('limitTo')(feed.articles, PAGESIZE);
+        row.count3 = feed.articles.length;
+        row.showMore3 = (feed.articles.length > PAGESIZE);
         rows.push(row);
         row = {
           source1: '',
@@ -51,7 +54,8 @@ app.controller('AppCtrl', ['$http', '$scope', '$mdSidenav', '$filter',  function
         };  
         j = 0;
       }
-    };
+    })
+    .value();
 
     if(j>0){
       rows.push(row);
@@ -65,14 +69,15 @@ app.controller('AppCtrl', ['$http', '$scope', '$mdSidenav', '$filter',  function
   
   $scope.showMore = function showMore (row, columnIndex) {
       var source = row['source' + columnIndex];
-      var feed;
-      for(var i=0; i<= $scope.feeds.length;i++ ){
-        if(source == $scope.feeds[i].source){
-          feed = $scope.feeds[i];
-          break;
-        }
-      }
-      row['articles' + columnIndex] = $filter('limitTo')(feed.articles, row['articles' + columnIndex].length + PAGESIZE);
+      var feed = _
+         .chain($scope.feeds)
+         .filter(function(feed){ return feed.source == source })
+         .first()
+         .value();
+      var numOfArticlesToDisplay = row['articles' + columnIndex].length + PAGESIZE;
+      
+      row['articles' + columnIndex] = _.take(feed.articles, numOfArticlesToDisplay);
+      //$filter('limitTo')(feed.articles, row['articles' + columnIndex].length + PAGESIZE);
       row['showMore' + columnIndex] = (feed.articles.length > row['articles' + columnIndex].length);
   };
 
