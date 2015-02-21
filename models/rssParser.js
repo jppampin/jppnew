@@ -3,11 +3,11 @@ function RssParser(){
 
 RssParser.prototype.parse = function parse(feed, cb){
 	var articles = null;
-	var result = [];
+	var result = {source: feed, articles: []};
 
 	if( !feed.rss || !feed.rss.channel || !feed.rss.channel[0].item ){
 		var error = new Error('No se puede parseaar el canal');
-		cb(error, null);
+		return cb(error, null);
 	}
 	
 	articles = feed.rss.channel[0].item;
@@ -34,7 +34,7 @@ RssParser.prototype.parse = function parse(feed, cb){
 			image = article.enclosure[0].$.url;
 		}
 
-		result.push({
+		result.articles.push({
 			title: title,
 			description: description,
 			link : url,

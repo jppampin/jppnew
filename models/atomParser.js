@@ -3,11 +3,11 @@ function AtomParser(){
 
 AtomParser.prototype.parse = function parse(source, cb){
 	var articles = null;
-	var result = [];
+	var result = { source: source, articles: []};
 
 	if( !source.feed || !source.feed.entry  ){
 		var error = new Error('No se puede parseaar el canal');
-		cb(error, null);
+		return cb(error, null);
 	}
 	
 	articles = source.feed.entry;
@@ -31,7 +31,7 @@ AtomParser.prototype.parse = function parse(source, cb){
 			image = article.content[0].div[0].img[0].$.src;
 		}
 
-		result.push({
+		result.articles.push({
 			title: title,
 			description: description,
 			link : url,

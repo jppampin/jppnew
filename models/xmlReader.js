@@ -29,9 +29,12 @@ http.get(url
 		});
 
 		res.on('end', function onEnd(err){
-			if(err) CB(err, null);
+			if(err) {
+				return cb(err, null)
+			};
+
 			parseString(body, function onParse(err, res){
-				cb(err, res);
+				return cb(err, res);
 			});
 		});
 }).on('error', function onError(err) {

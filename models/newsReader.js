@@ -18,9 +18,13 @@ var TrailersAddict = { source: 'Trailers Peliculas', url: 'http://www.traileradd
 var feeds = [TnFeed, InfobaeFeed,  ClarinFeed, RedUsersFeed, KickAssMovies, YifyMoviesBest2014, YifyMovies2015, LaNacionFeed, TrailersAddict];
 var feed;
 var urlParsed = [];
+var waiting=0;
 
 function xmlReaded(err, res){
-	if(err) throw err;
+	if(err) {
+		waiting--;
+		return complete();
+	};
 
 	if(res.feed){
 		atomParser.parse(res, xmlParsed);
@@ -30,24 +34,31 @@ function xmlReaded(err, res){
 };
 
 function xmlParsed(err, res){
-	if(err) throw err;
-	
-	urlParsed.push({ source: feed.source, articles: res });
+	waiting--;
 
-	if(feeds.length){
-		feed = feeds.splice(-1)[0];
-		getFeed(feed.url);
-	} else {
-		cb(null, urlParsed);
+	if(err) {
+		return complete();
+	};
+	
+	urlParsed.push(res);
+
+	complete();
+};
+
+function getFeeds(){
+	for(var i=0; i<feeds.length; i++){
+		waiting++;
+		xmlReader.load(feeds[i].url, xmlReaded);
 	}
 };
 
-function getFeed(url){
-	xmlReader.load(url, xmlReaded);
-};
+function complete(){
+	if(!waiting){
+		return cb(null, urlParsed);
+	}
+}
 
-feed = feeds.splice(-1)[0];
-getFeed(feed.url);
+getFeeds();
 
 };
 
