@@ -12,10 +12,10 @@ var ClarinFeed = { source: 'Clarin', url: 'http://clarin.feedsportal.com/c/33088
 var RedUsersFeed = {source: 'RedUsers', url: 'http://www.redusers.com/noticias/feed/', tags: ['noticia', 'tecnologia'] };
 var SportEsFeed= { source: 'Sport ES', url: 'http://www.sport.es/es/rss/last_news/rss.xml', tags: ['noticia', 'desportes'] };
 var KickAssMovies = { source: 'KickAss Movies', url: 'http://kickass.to/movies/?rss=1', tags: ['torrent', 'pelicula']};
-var YifyMoviesBest2014 = { source: 'Yify Movies - Best 2014', url: 'http://yts.re/rss/2014/1080p/all/7', tags: ['torrent', 'pelicula']};
+var YifyMoviesBest2014 = { source: 'Yify Movies - Best 2014', url: 'http://yts.re/rss/2014/all/all/0', tags: ['torrent', 'pelicula']};
 var YifyMovies2015 = { source: 'Yify Movies - 2015', url: 'http://yts.re/rss/2015/1080p/all/0', tags: ['torrent', 'pelicula']};
 var TrailersAddict = { source: 'Trailers Peliculas', url: 'http://www.traileraddict.com/rss', tags: ['trailer', 'pelicula']};
-var feeds = [TnFeed, InfobaeFeed,  ClarinFeed, RedUsersFeed, KickAssMovies, YifyMoviesBest2014, YifyMovies2015, LaNacionFeed, TrailersAddict];
+var feeds = [TnFeed, InfobaeFeed,  ClarinFeed, RedUsersFeed, KickAssMovies,  LaNacionFeed, TrailersAddict];
 var feed;
 var urlParsed = [];
 var waiting=0;
@@ -26,21 +26,37 @@ function xmlReaded(err, res){
 		return complete();
 	};
 
+	//Busco la fuente por url y le asigno el documento.
+	for(var i=0;i<feeds.length;i++){
+		if(res.url == feeds[i].url){
+			feeds[i].doc = res.doc;
+		}
+	}
+
 	if(res.feed){
-		atomParser.parse(res, xmlParsed);
+		atomParser.parse(res.doc, xmlParsed);
 	} else {
-		rssParser.parse(res, xmlParsed);
+		rssParser.parse(res.doc, xmlParsed);
 	};
+
 };
 
 function xmlParsed(err, res){
+	var source='';
+
 	waiting--;
 
 	if(err) {
 		return complete();
 	};
 	
-	urlParsed.push(res);
+	for(var i=0; i<feeds.length;i++){
+		if(feeds[i].doc == res.source){
+			source = feeds[i].source;
+		}
+	}
+
+	urlParsed.push({source: source, articles: res.articles});
 
 	complete();
 };

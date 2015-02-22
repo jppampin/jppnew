@@ -34,7 +34,8 @@ http.get(url
 			};
 
 			parseString(body, function onParse(err, res){
-				return cb(err, res);
+				var result = {url: url , doc: res};
+				return cb(err, result);
 			});
 		});
 }).on('error', function onError(err) {
