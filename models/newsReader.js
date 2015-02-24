@@ -50,6 +50,7 @@ function xmlParsed(err, res){
 		return complete();
 	};
 	
+	//busco la fuente por documento
 	for(var i=0; i<feeds.length;i++){
 		if(feeds[i].doc == res.source){
 			source = feeds[i].source;
