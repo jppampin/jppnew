@@ -15,10 +15,12 @@ var KickAssMovies = { source: 'KickAss Movies', url: 'http://kickass.to/movies/?
 var YifyMoviesBest2014 = { source: 'Yify Movies - Best 2014', url: 'http://yts.re/rss/2014/all/all/0', tags: ['torrent', 'pelicula']};
 var YifyMovies2015 = { source: 'Yify Movies - 2015', url: 'http://yts.re/rss/2015/1080p/all/0', tags: ['torrent', 'pelicula']};
 var TrailersAddict = { source: 'Trailers Peliculas', url: 'http://www.traileraddict.com/rss', tags: ['trailer', 'pelicula']};
-var feeds = [TnFeed, InfobaeFeed,  ClarinFeed, RedUsersFeed, KickAssMovies,  LaNacionFeed, TrailersAddict];
+var feeds = [TnFeed, InfobaeFeed,  ClarinFeed, RedUsersFeed, 
+			 KickAssMovies,  LaNacionFeed, TrailersAddict, 
+			 YifyMoviesBest2014, YifyMovies2015];
 var feed;
 var urlParsed = [];
-var waiting=0;
+var waiting=feeds.length;
 
 function xmlReaded(err, res){
 	if(err) {
@@ -64,7 +66,6 @@ function xmlParsed(err, res){
 
 function getFeeds(){
 	for(var i=0; i<feeds.length; i++){
-		waiting++;
 		xmlReader.load(feeds[i].url, xmlReaded);
 	}
 };
