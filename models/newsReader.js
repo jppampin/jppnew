@@ -1,3 +1,6 @@
+var Q = require('q');
+var info = require('debug')('jppnew:info');
+
 function NewsReader(){
 }
 
@@ -5,6 +8,8 @@ NewsReader.prototype.lookup = function(cb){
 var xmlReader = require('./xmlReader');
 var rssParser = require('./rssParser');
 var atomParser = require('./atomParser');
+var xmlReader_load = Q.denodeify(xmlReader.load);
+
 var TnFeed = { source: 'TN', url: 'http://tn.com.ar/rss.xml' , tags: ['noticia']};
 var InfobaeFeed = {source: 'Infobae', url: 'http://cdn01.am.infobae.com/adjuntos/163/rss/ahora.xml', tags: ['noticia'] };
 var LaNacionFeed = {source: 'La Nacion', url: 'http://contenidos.lanacion.com.ar/herramientas/rss/origen=2', tags: ['noticia'] };
@@ -17,15 +22,12 @@ var YifyMovies2015 = { source: 'Yify Movies - 2015', url: 'http://yts.re/rss/201
 var TrailersAddict = { source: 'Trailers Peliculas', url: 'http://www.traileraddict.com/rss', tags: ['trailer', 'pelicula']};
 var feeds = [TnFeed, InfobaeFeed,  ClarinFeed, RedUsersFeed, 
 			 KickAssMovies,  LaNacionFeed, TrailersAddict, 
-			 YifyMoviesBest2014, YifyMovies2015];
-var feed;
+			 YifyMoviesBest2014, YifyMovies2015, SportEsFeed];
 var urlParsed = [];
-var waiting=feeds.length;
 
 function xmlReaded(err, res){
 	if(err) {
-		waiting--;
-		return complete();
+		return info(err);
 	};
 
 	//Busco la fuente por url y le asigno el documento.
@@ -46,10 +48,8 @@ function xmlReaded(err, res){
 function xmlParsed(err, res){
 	var source='';
 
-	waiting--;
-
 	if(err) {
-		return complete();
+		return info(err);
 	};
 	
 	//busco la fuente por documento
@@ -60,21 +60,27 @@ function xmlParsed(err, res){
 	}
 
 	urlParsed.push({source: source, articles: res.articles});
-
-	complete();
 };
 
 function getFeeds(){
-	for(var i=0; i<feeds.length; i++){
-		xmlReader.load(feeds[i].url, xmlReaded);
-	}
-};
+	var promises = feeds.map( function(feed){
+		return xmlReader_load(feed.url)
+			.then( function(res) {
+				xmlReaded(null, res);
+			})
+			.catch(function(err){
+				xmlReaded(err);
+			});
+	});
 
-function complete(){
-	if(!waiting){
-		return cb(null, urlParsed);
-	}
-}
+	return Q.all(promises)
+		.then(function done(){
+			return cb(null, urlParsed);
+		})
+		.catch(function(err){ 
+			return cb(err);
+		});
+};
 
 getFeeds();
 
