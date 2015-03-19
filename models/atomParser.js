@@ -5,6 +5,14 @@ AtomParser.prototype.parse = function parse(source, cb){
 	var articles = null;
 	var result = { source: source, articles: []};
 
+	if(!cb){
+		return new Error('Debe ingresar un callback');
+	}
+
+	if(!source){
+		return cb(new Error('Debe ingresar una url'));
+	}
+
 	if( !source.feed || !source.feed.entry  ){
 		var error = new Error('No se puede parseaar el canal');
 		return cb(error, null);
@@ -40,7 +48,7 @@ AtomParser.prototype.parse = function parse(source, cb){
 		});
 	}
 
-	cb(null, result);
+	return cb(null, result);
 };
 
 module.exports = new AtomParser();
