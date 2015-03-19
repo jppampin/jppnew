@@ -30,4 +30,9 @@ describe('xmlReader', function suite(){
 	it('Should not retrieve an error', function(){
 		should(error).be.undefined;
 	});
-});
+
+	it('Should have properties url and doc', function(){
+		result.should.have.property('url');
+		result.should.have.property('doc');
+	});
+});	
