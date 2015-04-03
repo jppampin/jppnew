@@ -1,0 +1,118 @@
+<div layout="column" flex id="content" ng-cloak>
+            <md-list>
+            <md-item ng-repeat="row in rows">
+            <md-item-content layout="column" layout-gt-sm="row" layout-align="center start">
+            <!-- Column 1 -->
+            <div flex>
+                <md-subheader class="md-primary">{{row.source1}}</md-subheader>
+                <md-list> 
+                  <md-item ng-repeat="item in row.articles1">
+                    <md-item-content>
+                    <!-- Single Line Title -->
+                      <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" >
+                        <h3>{{item.title}} </h3> 
+                      </div>
+                     <!-- End Single Line Title -->
+
+                    <!-- Article Details -->
+                      <div class="md-tile-content detail" ng-if="item.expanded" ng-click="item.expanded = !item.expanded" layout-wrap>
+                        <h3>{{item.title}}</h3>
+                        <h4>{{item.pubDate}}</h4>
+                        <div flex >
+                        <p  ng-bind-html="item.description"></p>
+                        </div>
+                        <div layout="column" layout-align="center end" layout-padding>
+                        <div>
+                        <md-button ng-href="{{item.link}}" class="md-raised md-primary"> Ver articulo completo... </md-button>                        
+                        </div>
+                        </div>
+                      </div>
+                    <!-- End Article Details -->
+                    </md-item-content>
+                    <md-divider ng-if="!$last"></md-divider>
+                    <div layout="column" layout-align="center end" layout-padding>
+                    <div>
+                    <md-button ng-href="#" ng-click="showMore(row, 1);" class="md-primary" ng-if="$last && row.showMore1">Ver mas articulos...</md-button>
+                    </div>
+                     </div>
+                  </md-item>
+                </md-list>
+
+            </div>        
+            <!-- End Column 1 -->
+
+            <!-- Column 2 -->
+            <div flex>
+                <md-subheader class="md-primary">{{row.source2}}</md-subheader>
+                <md-list> 
+                  <md-item ng-repeat="item in row.articles2">
+                    <md-item-content>
+                    <!-- Single Line Title -->
+                      <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" >
+                        <h3>{{item.title}} </h3>
+                      </div>
+                     <!-- End Single Line Title -->
+
+                    <!-- Article Details -->
+                    <div class="md-tile-content detail" ng-if="item.expanded" ng-click="item.expanded = !item.expanded">
+                        <h3>{{item.title}}</h3>
+                        <h4>{{item.pubDate}}</h4>
+                        <p layout-wrap ng-bind-html="item.description"></p>
+                        <div layout="column" layout-align="center end" layout-padding>
+                        <div>
+                        <md-button ng-href="{{item.link}}" class="md-raised md-primary"> Ver articulo completo... </md-button>                        
+                        </div>
+                        </div>
+                      </div>
+                    <!-- End Article Details -->
+                    </md-item-content>
+                    <md-divider ng-if="!$last"></md-divider>
+                    <div layout="column" layout-align="center end" layout-padding>
+                    <div>
+                    <md-button ng-href="#" ng-click="showMore(row, 2);" class="md-primary" ng-if="$last && row.showMore2">Ver mas articulos...</md-button>
+                    </div>
+                     </div>
+                  </md-item>
+                </md-list>
+            </div>        
+            <!-- End Column 2 -->
+
+            <!-- Column 3 -->
+            <div flex>
+                <md-subheader class="md-primary">{{row.source3}}</md-subheader>
+                <md-list> 
+                  <md-item ng-repeat="item in row.articles3">
+                    <md-item-content>
+                     <!-- Single Line Title -->
+                      <div class="md-tile-content" ng-if="!item.expanded" ng-click="item.expanded = !item.expanded" >
+                        <h3>{{item.title}} </h3> 
+                      </div>
+                     <!-- End Single Line Title -->
+
+                    <!-- Article Details -->
+                      <div class="md-tile-content detail" ng-if="item.expanded" ng-click="item.expanded = !item.expanded">
+                        <h3>{{item.title}}</h3>
+                        <h4>{{item.pubDate}}</h4>
+                        <p layout-wrap ng-bind-html="item.description"></p>
+                        <div layout="column" layout-align="center end" layout-padding>
+                        <div>
+                        <md-button ng-href="{{item.link}}" class="md-raised md-primary"> Ver articulo completo... </md-button>                        
+                        </div>
+                        </div>
+                      </div>
+                    <!-- End Article Details -->
+                    </md-item-content>
+                    <md-divider ng-if="!$last"></md-divider>
+                    <div layout="column" layout-align="center end" layout-padding>
+                    <div>
+                    <md-button ng-href="#" ng-click="showMore(row, 3);" class="md-primary" ng-if="$last && row.showMore3">Ver mas articulos...</md-button>
+                    </div>
+                     </div>
+                  </md-item>
+                </md-list>
+            </div>        
+            <!-- End Column 3 -->
+            <md-item-content>
+            </md-item>
+            </md-list>
+        </div>

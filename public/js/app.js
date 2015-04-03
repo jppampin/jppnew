@@ -1,11 +1,33 @@
-var app = angular.module('StarterApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate', 'ngSanitize']);
+var app = angular.module('StarterApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate', 'ngSanitize', 'ngRoute']);
 
-app.controller('AppCtrl', ['$http', '$scope', '$mdSidenav', '$filter',  function($http, $scope, $mdSidenav, $filter){
-  var PAGESIZE = 5;
+app.config(['$routeProvider', '$locationProvider',
+  function($routeProvider, $locationProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: 'grid.html',
+        controller: 'AppCtrl'
+      })
+      .when('/login', {
+        templateUrl: 'login.html'
+      })
+      
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    });
+}]);
+
+
+app.controller('SidebarCtrl',['$mdSidenav','$scope' ,function($mdSidenav,$scope){
   $scope.toggleSidenav = function(menuId) {
     $mdSidenav(menuId).toggle();
   };
 
+}]);
+
+app.controller('AppCtrl', ['$http', '$scope', '$mdSidenav', '$filter',  function($http, $scope, $mdSidenav, $filter){
+  var PAGESIZE = 5;
+  
   $http.get('/news').success(function(data) {
     var rows = [];
 
@@ -80,5 +102,4 @@ app.controller('AppCtrl', ['$http', '$scope', '$mdSidenav', '$filter',  function
       //$filter('limitTo')(feed.articles, row['articles' + columnIndex].length + PAGESIZE);
       row['showMore' + columnIndex] = (feed.articles.length > row['articles' + columnIndex].length);
   };
-
 }]);
