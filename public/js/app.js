@@ -10,13 +10,46 @@ app.config(['$routeProvider', '$locationProvider',
       .when('/login', {
         templateUrl: 'login.html'
       })
-      
+      .when('/signup', {
+        templateUrl: 'signup.html',
+        controller: 'signupController'
+      })
     $locationProvider.html5Mode({
       enabled: true,
       requireBase: false
     });
 }]);
 
+app.controller('signupController', ['$http', '$scope', '$mdToast', function($http, $scope, $mdToast){
+  $scope.signUp = function signUp(){
+    var newUser = {
+      name : $scope.name,
+      email : $scope.email,
+      password : $scope.password,
+      confirmPassword : $scope.confirmPassword
+    };
+    
+    $http({
+    method: 'POST',
+    url: '/signup',
+    data: $.param(newUser),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).success(function success(data, status, headers, config) {
+      $mdToast.show(
+        $mdToast.simple()
+          .content('Registered!')
+          .hideDelay(3000)
+      );
+    })
+    .error(function(data, status, headers, config) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log(data);
+  });
+  };
+
+  
+}]);
 
 app.controller('SidebarCtrl',['$mdSidenav','$scope' ,function($mdSidenav,$scope){
   $scope.toggleSidenav = function(menuId) {

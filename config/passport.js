@@ -1,4 +1,5 @@
 // config/passport.js
+var info = require('debug')('jppnew:info');
 
 // load all the things we need
 var LocalStrategy = require('passport-local').Strategy;
@@ -39,9 +40,10 @@ module.exports = function(passport){
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
     function(req, email, password, done) {
-
+        info('Running signup');
 		// find a user whose email is the same as the forms email
 		// we are checking to see if the user trying to login already exists
+		var confirmPassword = req.body.confirmPassword;
         User.findOne({ 'local.email' :  email }, function(err, user) {
             // if there are any errors, return the error
             if (err)
@@ -49,24 +51,29 @@ module.exports = function(passport){
 
             // check to see if theres already a user with that email
             if (user) {
-                return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
-            } else {
-
-				// if there is no user with that email
-                // create the user
-                var newUser = new User();
-
-                // set the user's local credentials
-                newUser.local.email    = email;
-                newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
-
-				// save the user
-                newUser.save(function(err) {
-                    if (err)
-                        throw err;
-                    return done(null, newUser);
-                });
+                return done(null, false, 'That email is already taken.');
+            } 
+            
+            if(password !== confirmPassword){
+                return done(null, false, 'Password mismatch!');
             }
+            
+
+			// if there is no user with that email
+            // create the user
+            var newUser = new User();
+
+            // set the user's local credentials
+            newUser.local.email    = email;
+            newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
+
+			// save the user
+            newUser.save(function(err) {
+                if (err)
+                    throw err;
+                return done(null, newUser);
+            });
+            
 
         });
 

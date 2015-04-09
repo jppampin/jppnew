@@ -1,10 +1,10 @@
-<div layout="column" flex-gt-sm="30" id="content" class="md-whiteframe-z1" layout-align="center center" ng-cloak layout-margin>
+<div layout="column" flex-gt-sm="40" id="content" class="md-whiteframe-z1" ng-cloak layout-margin>
     <md-toolbar class="md-primary">
     <h1 class="md-toolbar-tools">
       Login
     </h1>
   </md-toolbar>
-    <md-container flex layout="row" sm-layout="column">
+    <md-container layout="column">
         <md-input-container>
             <label>Email</label>
             <input name="email" type="email">
@@ -13,5 +13,8 @@
             <label>Password</label>
             <input name="password" type="password">
         </md-input-container>
+        <div layout-margin layout="row">
+            <md-button flex layout-margin class="md-raised md-primary">Login</md-button>
+        </<div>
     </md-container>
 </div>
