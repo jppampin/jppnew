@@ -44,8 +44,12 @@ module.exports = function(passport){
 		// find a user whose email is the same as the forms email
 		// we are checking to see if the user trying to login already exists
 		var confirmPassword = req.body.confirmPassword;
+		var name = req.body.name;
+		
         User.findOne({ 'local.email' :  email }, function(err, user) {
             // if there are any errors, return the error
+            
+            
             if (err)
                 return done(err);
 
@@ -64,6 +68,7 @@ module.exports = function(passport){
             var newUser = new User();
 
             // set the user's local credentials
+            newUser.local.name     = name;
             newUser.local.email    = email;
             newUser.local.password = newUser.generateHash(password); // use the generateHash function in our user model
 
@@ -102,11 +107,11 @@ module.exports = function(passport){
 
             // if no user is found, return the message
             if (!user)
-                return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                return done(null, false, 'No user found.'); // req.flash is the way to set flashdata using connect-flash
 
             // if the user is found but the password is wrong
             if (!user.validPassword(password))
-                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+                return done(null, false, 'Oops! Wrong password.'); // create the loginMessage and save it to session as flashdata
 
             // all is well, return successful user
             return done(null, user);

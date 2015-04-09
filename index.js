@@ -15,7 +15,7 @@ app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 // required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({ secret: 'chinichinichini' })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 

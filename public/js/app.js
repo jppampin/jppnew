@@ -8,7 +8,8 @@ app.config(['$routeProvider', '$locationProvider',
         controller: 'AppCtrl'
       })
       .when('/login', {
-        templateUrl: 'login.html'
+        templateUrl: 'login.html',
+        controller: 'loginController'
       })
       .when('/signup', {
         templateUrl: 'signup.html',
@@ -18,9 +19,25 @@ app.config(['$routeProvider', '$locationProvider',
       enabled: true,
       requireBase: false
     });
+    
+    
 }]);
 
-app.controller('signupController', ['$http', '$scope', '$mdToast', function($http, $scope, $mdToast){
+app.factory('ParamUtils', function(){
+  return {
+    serialize: function serialize(source) {
+      var array = [];
+    
+      for(var key in source) {
+         array.push(encodeURIComponent(key) + "=" + encodeURIComponent(source[key]));
+      }
+    
+      return array.join("&");
+    }
+  };
+});
+
+app.controller('signupController', [ '$http', '$scope', '$mdToast', 'ParamUtils', function( $http, $scope, $mdToast, ParamUtils){
   $scope.signUp = function signUp(){
     var newUser = {
       name : $scope.name,
@@ -32,7 +49,7 @@ app.controller('signupController', ['$http', '$scope', '$mdToast', function($htt
     $http({
     method: 'POST',
     url: '/signup',
-    data: $.param(newUser),
+    data:  ParamUtils.serialize(newUser),
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     }).success(function success(data, status, headers, config) {
       $mdToast.show(
@@ -48,8 +65,36 @@ app.controller('signupController', ['$http', '$scope', '$mdToast', function($htt
   });
   };
 
-  
 }]);
+
+app.controller('loginController', ['$http', '$scope', '$mdToast', 'ParamUtils', function($http, $scope, $mdToast, ParamUtils){
+  $scope.login = function login(){
+    var loginInfo = {
+      email: $scope.email,
+      password : $scope.password
+    };
+    
+    $http({
+    method: 'POST',
+    url: '/login',
+    data: ParamUtils.serialize(loginInfo),
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).success(function success(data, status, headers, config) {
+      $mdToast.show(
+        $mdToast.simple()
+          .content('Logged in!')
+          .hideDelay(3000)
+      );
+    })
+    .error(function(data, status, headers, config) {
+      // called asynchronously if an error occurs
+      // or server returns response with an error status.
+      console.log(data);
+  });
+  };
+
+}]);
+
 
 app.controller('SidebarCtrl',['$mdSidenav','$scope' ,function($mdSidenav,$scope){
   $scope.toggleSidenav = function(menuId) {

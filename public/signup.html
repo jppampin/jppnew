@@ -5,6 +5,7 @@
     </h1>
   </md-toolbar>
     <md-container layout="column">
+        <form ng-submit="signUp()">
         <md-input-container>
             <label>Name</label>
             <input name="name" type="text" ng-model="name">
@@ -22,7 +23,8 @@
             <input name="confirmPassword" type="password" ng-model="confirmPassword">
         </md-input-container>
         <div layout="row" layout-margin>
-        <md-button flex class="md-raised md-primary" ng-click="signUp()">Sign Up</md-button>
+        <md-button flex class="md-raised md-primary" >Sign Up</md-button>
         </div>
+        </form>
     </md-container>
 </div>

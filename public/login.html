@@ -5,16 +5,18 @@
     </h1>
   </md-toolbar>
     <md-container layout="column">
+        <form ng-submit="login()">
         <md-input-container>
             <label>Email</label>
-            <input name="email" type="email">
+            <input name="email" type="email" ng-model="email">
         </md-input-container>
         <md-input-container>
             <label>Password</label>
-            <input name="password" type="password">
+            <input name="password" type="password" ng-model="password">
         </md-input-container>
         <div layout-margin layout="row">
             <md-button flex layout-margin class="md-raised md-primary">Login</md-button>
         </<div>
+        </form>
     </md-container>
 </div>
