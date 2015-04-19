@@ -1,4 +1,13 @@
+
 var newsReader = require('../models/newsReader');
+
+function checkAuthentication(req, res, next){
+	if (!req.isAuthenticated(	) ) {
+		res.send(401);
+	} else {
+		next();
+	}
+}
 
 function newsController(req, res){
 	newsReader.lookup(function processed(err, feeds){
@@ -8,5 +17,6 @@ function newsController(req, res){
 }
 
 module.exports = {
-	newsController: newsController
+	newsController: newsController,
+	checkAuthentication : checkAuthentication
 }

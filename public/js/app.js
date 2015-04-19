@@ -1,7 +1,9 @@
 var app = angular.module('StarterApp', ['ngMaterial', 'angular-loading-bar', 'ngAnimate', 'ngSanitize', 'ngRoute']);
 
-app.config(['$routeProvider', '$locationProvider',
-  function($routeProvider, $locationProvider) {
+
+
+app.config(['$routeProvider', '$locationProvider', '$httpProvider',
+  function($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'grid.html',
@@ -14,10 +16,27 @@ app.config(['$routeProvider', '$locationProvider',
       .when('/signup', {
         templateUrl: 'signup.html',
         controller: 'signupController'
-      })
+      });
+      
     $locationProvider.html5Mode({
       enabled: true,
       requireBase: false
+    });
+    
+    // Adding interceptor to check login
+    $httpProvider.interceptors.push(function($q, $location){
+      return {
+        response : function(response) {
+          return response;
+        },
+        responseError : function(response){
+          if(response.status === 401){
+            $location.url('/login');
+          };
+          
+          return $q.reject(response);
+        }
+      };
     });
     
     
