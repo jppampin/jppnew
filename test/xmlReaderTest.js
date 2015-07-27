@@ -10,7 +10,7 @@ var xmlReader = proxyquire('../models/xmlReader', { http: httpStubed });
 var xmlReader_load = Q.denodeify(xmlReader.load);
 
 debug('Stubed:' + httpStubed);
-describe('xmlReader', function suite(){
+xdescribe('xmlReader', function suite(){
 	before( function(done){
 		xmlReader_load('http://anyUrl.com')
 			.then(function(res){

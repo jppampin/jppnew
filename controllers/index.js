@@ -1,5 +1,6 @@
 
 var newsReader = require('../models/newsReader');
+var matchController = require('./match');
 
 function checkAuthentication(req, res, next){
 	if (!req.isAuthenticated(	) ) {
@@ -18,5 +19,6 @@ function newsController(req, res){
 
 module.exports = {
 	newsController: newsController,
-	checkAuthentication : checkAuthentication
+	checkAuthentication : checkAuthentication,
+	matchController: matchController
 }
