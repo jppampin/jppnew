@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema =  mongoose.Schema;
-require('./user');
 
 var playerSchema = mongoose.Schema({
     numOfMatches : Number,
