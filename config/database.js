@@ -1,3 +1,3 @@
 module.exports = {
-    connectionString : 'mongodb://' + process.env.IP + '/test'
+    connectionString : 'mongodb://localhost/test'
 }

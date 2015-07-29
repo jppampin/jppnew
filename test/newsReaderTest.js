@@ -9,7 +9,7 @@ var result, error;
 var xmlReaderStubed = proxyquire('../models/xmlReader', { http: httpStubed });
 var newsReader = proxyquire('../models/newsReader', { xmlReader: xmlReaderStubed });
 
-describe('newsReadr', function sute(){
+xdescribe('newsReadr', function sute(){
 	before(function(done){
 		newsReader.lookup(function(err, res){
 			result = res;

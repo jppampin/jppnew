@@ -1,5 +1,9 @@
+var models = require('../models')
+var newsReader = models.newsReader;
+var matchController = require('./match')(models.Match);
+var debug = require('debug')('jppnew:controllers:init');
 
-var newsReader = require('../models/newsReader');
+debug(matchController);
 
 function checkAuthentication(req, res, next){
 	if (!req.isAuthenticated(	) ) {
@@ -18,5 +22,6 @@ function newsController(req, res){
 
 module.exports = {
 	newsController: newsController,
-	checkAuthentication : checkAuthentication
+	checkAuthentication : checkAuthentication,
+	matchController: matchController
 }
