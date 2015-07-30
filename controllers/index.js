@@ -1,6 +1,6 @@
 var models = require('../models')
 var newsReader = models.newsReader;
-var matchController = require('./match')(models.Match);
+var matchController = require('./match')(models);
 var debug = require('debug')('jppnew:controllers:init');
 
 debug(matchController);
