@@ -45,5 +45,6 @@ module.exports = function(app, passport){
 	})
 
 	app.post('/api/match/:matchId/addPlayer', controllers.matchController.addPlayer);
+	app.post('/api/match/:matchId/confirmPlayer', controllers.matchController.confirmPlayer);
 }
 

@@ -1,3 +1,5 @@
+var info = require('debug')('jppnew:matchController');
+
 function MatchController(models){
 	var Match = models.Match;
 	var Player = models.Player;
@@ -5,12 +7,16 @@ function MatchController(models){
 
 	this.getAll = getAll;
 	this.addPlayer = addPlayer;
+	this.confirmPlayer = confirmPlayer;
 	
 	function getAll(req, res, next){
-		Match.find().populate('players.user', 'local.name local.email facebook.name facebook.email')
+		return Match.find().populate('players.user', 'local.name local.email facebook.name facebook.email')
 			.populate('players', 'confirmed')
 			.then(function(matches){
 				res.json(matches);
+				return matches;
+			}, function error (err) {
+				return err;
 			});
 	}
 
@@ -44,6 +50,33 @@ function MatchController(models){
 					});	
 			});
 			
+	}
+
+	function confirmPlayer(req, res, next){
+		var matchId = req.params.matchId;
+		var player = req.body;
+
+		return Match.findOne({ '_id' : matchId })
+			.populate('players.user', 'local.name local.email facebook.name facebook.email')
+			.populate('players', 'confirmed')
+			.then(function (match) {
+				var playerConfirmerd = null;
+
+				for(var i=0; i< match.players.length; i++){
+					var playerToCheck = match.players[i];
+					if(playerToCheck.user.local.email === player.user.local.email){
+						playerConfirmerd = playerToCheck;
+						break;
+					}
+				}
+
+				playerConfirmerd.confirmed = true;
+				match.save().then(function () {
+					res.end();
+				});
+
+				return match;
+		})
 	}
 }
 
