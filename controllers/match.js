@@ -70,7 +70,7 @@ function MatchController(models){
 					}
 				}
 
-				playerConfirmerd.confirmed = true;
+				playerConfirmerd.confirmed = player.confirmed;
 				match.save().then(function () {
 					res.end();
 				});
