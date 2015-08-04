@@ -29,6 +29,8 @@ module.exports = function(app, passport){
 	});
 
 	app.get('/api/match', controllers.matchController.getAll);
+	app.get('/api/match/getLast', controllers.matchController.getLast);
+
 
 	app.get('/api/forgotPassword', function(req, res, next){ 
 		var forgorPasswordMessage = {
@@ -46,5 +48,6 @@ module.exports = function(app, passport){
 
 	app.post('/api/match/:matchId/addPlayer', controllers.matchController.addPlayer);
 	app.post('/api/match/:matchId/confirmPlayer', controllers.matchController.confirmPlayer);
+	app.post('/api/match', controllers.matchController.addMatch);
 }
 

@@ -6,8 +6,10 @@ function MatchController(models){
 	var User = models.User;
 
 	this.getAll = getAll;
+	this.getLast = getLast;
 	this.addPlayer = addPlayer;
 	this.confirmPlayer = confirmPlayer;
+	this.addMatch = addMatch;
 	
 	function getAll(req, res, next){
 		return Match.find().populate('players.user', 'local.name local.email facebook.name facebook.email')
@@ -18,6 +20,18 @@ function MatchController(models){
 			}, function error (err) {
 				return err;
 			});
+	}
+
+	function getLast(req, res, next){
+		return Match.findOne({}, {}, {sort : {when : 1}})
+						.select('_id title players')
+						.populate('players.user', 'local.name local.email facebook.name facebook.email')
+						.then(function  (match) {
+							res.json(match);
+							return match;
+						}, function error (err) {
+							return error;
+						});
 	}
 
 	function addPlayer(req, res, next){
@@ -70,7 +84,7 @@ function MatchController(models){
 					}
 				}
 
-				playerConfirmerd.confirmed = true;
+				playerConfirmerd.confirmed = player.confirmed;
 				match.save().then(function () {
 					res.end();
 				});
@@ -78,6 +92,18 @@ function MatchController(models){
 				return match;
 		})
 	}
+
+	function addMatch(req, res, next) {
+		var match = req.data;
+		var newMatch = new Match();
+		newMatch.title = match.title;
+		return newMatch.save().then(function  (match) {
+			res.send(200);
+		}, function error (err) {
+			res.send("Error al crear el partido!");
+		});
+	}
+
 }
 
 module.exports = function init(Match){

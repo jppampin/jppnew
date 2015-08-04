@@ -6,7 +6,7 @@ module.exports = function init(Player){
 
 var matchSchema = mongoose.Schema({
     title : String,
-    when : Date,
+    when : { type: Date, default: Date.now },
     location : String,
     players : [Player.schema ]
 });
