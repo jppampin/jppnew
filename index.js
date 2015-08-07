@@ -11,7 +11,7 @@ mongoose.connect(database.connectionString);
 
 require('./config/passport')(passport);
 app.set('port', (process.env.PORT || 5000));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public/dist'));
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 

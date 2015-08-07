@@ -23,7 +23,7 @@ function MatchController(models){
 	}
 
 	function getLast(req, res, next){
-		return Match.findOne({}, {}, {sort : {when : 1}})
+		return Match.findOne({}, {}, { sort : { when : -1 } } )
 						.select('_id title players')
 						.populate('players.user', 'local.name local.email facebook.name facebook.email')
 						.then(function  (match) {
@@ -94,7 +94,8 @@ function MatchController(models){
 	}
 
 	function addMatch(req, res, next) {
-		var match = req.data;
+		var match = req.body;
+		info(match);
 		var newMatch = new Match();
 		newMatch.title = match.title;
 		return newMatch.save().then(function  (match) {
