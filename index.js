@@ -7,7 +7,10 @@ var mongoose =require('mongoose');
 var database = require('./config/database');
 var session = require("express-session");
 
-mongoose.connect(database.connectionString);
+if(process.env.NODE_ENV === 'development')
+  mongoose.connect(database.connectionString);
+else
+  mongoose.connect(database.production);
 
 require('./config/passport')(passport);
 app.set('port', (process.env.PORT || 5000));
