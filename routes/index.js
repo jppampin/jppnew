@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var controllers = require('../controllers');
-var sendgrid = require('sendgrid')('jppampin', 'e8J3EkQ87og7');
+var sendgrid = require('sendgrid')(process.env.SENDGRID_USER, process.env.SENDGRID_PASSWORD);
 
 module.exports = function(app, passport){
 	var bowerPath = path.join(__dirname , '../bower_components');
