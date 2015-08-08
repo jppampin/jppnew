@@ -6,9 +6,10 @@ var passport = require('passport');
 var mongoose =require('mongoose');
 var database = require('./config/database');
 var session = require("express-session");
+var info = require('debug')('jppnew:index');
 
-if(process.env.NODE_ENV === 'development')
-  mongoose.connect(database.connectionString);
+if(app.get('env') === 'development')
+  mongoose.connect(database.development);
 else
   mongoose.connect(database.production);
 
